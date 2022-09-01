@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_212146) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_01_214542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,11 +18,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_212146) do
     t.string "title"
     t.text "description"
     t.decimal "amount"
-    t.boolean "paid"
+    t.boolean "paid", default: false, null: false
     t.date "paid_on"
+    t.string "paid_via"
+    t.date "transaction_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id"
+    t.integer "person2_id"
     t.index ["user_id"], name: "index_bills_on_user_id"
   end
 
@@ -34,9 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_212146) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bills", "users"
 end

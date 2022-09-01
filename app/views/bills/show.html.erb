@@ -3,3 +3,9 @@
 <p>amount = <%= @bill.amount %></p>
 <p>paid? = <%= @bill.paid %></p>
 <p>paid on = <%= @bill.paid_on %></p>
+<p>paid via = <%= @bill.paid_via %></p>
+<p>transaction date = <%= @bill.transaction_date %></p>
+<p>user id = <%= @bill.user_id %></p>
+<p>person2 id = <%= @bill.person2_id %></p>
+
+<%= link_to 'edit', edit_bill_path(@bill) %>
