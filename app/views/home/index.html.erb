@@ -27,22 +27,38 @@
 
   <div class="sticky pb-2 font-light text-xs text-gray-400">[8/30/22]</div>
 
-  <div class="grid grid-cols-5">
-    <div class="col-span-4">
-      <p class="text-xl">[Emma] [paid/owes] [Corey] for [Amazon Fresh]</p>
-    </div>
-    <div class="shrink-0 text-right">
-      <p class="text-xl font-semibold text-green-600">$42.19</p>
-    </div>
-  </div>
-  <div class="border-b border-gray-400 py-2">
-    <p>Paid via [Zelle] on [8/31/22] (if paid)</p>
-  </div>
-  <div class="mt-2">
-    <p>Broccoli $5.00</p>
-    <p>Asparagus $4.39</p>
-  </div>
+  <% @bills.each do |bill| %>
+    <%= link_to bill do %>
+      <div class="grid grid-cols-5">
+        <div class="col-span-4">
+          <p class="text-xl"><%= bill.user.first_name %> <%= paid_or_owes(bill) %> <%= User.find(bill.person2_id).first_name %> for <%= bill.title %></p>
+        </div>
+        <div class="shrink-0 text-right">
+          <% if bill.paid? %>
+            <p class="text-xl font-semibold text-green-700">
+          <% else %>
+            <p class="text-xl font-semibold text-red-700">
+          <% end %>
+            <%= number_to_currency(bill.amount) %>
+          </p>
+        </div>
+      </div>
 
+      <% if bill.paid? %>
+        <div class="pt-1">
+          <p class="font-light text-gray-600">Paid via <%= bill.paid_via %> on <%= bill.paid_on %> (if paid)</p>
+        </div>
+      <% end %>
+
+      <% if !bill.description.empty? %>
+        <div class="font-light text-gray-500 text-sm mt-2 pl-4">
+          <p><%= bill.description %></p>
+        </div>
+      <% end %>
+    <% end %>
+
+      <div class="my-5 border border-dashed border-black"></div>
+  <% end %>
 
   <p><%= link_to 'go to bills', bills_path %></p>
 
