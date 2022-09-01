@@ -1,12 +1,49 @@
-<div>
-  <h1 class="font-bold text-4xl">Home#index</h1>
-  
-  <% if current_user %>
-    <p>Logged in as <%= current_user.id %></p>
-    <%= link_to 'Sign out', destroy_user_session_path %>
-  <% else %>
-    <%= link_to 'Sign in', new_user_session_url %>
-  <% end %>
+<div class="px-5">
+  <div class="grid grid-cols-3 border-b border-slate-400 py-3">
+
+    <%# Navigation opener %>
+    <div id="nav-opener" class="border">[ x ]</div>
+
+    <%# Center of page %>
+    <div class="border text-center">
+      <p class="text-xl">IOU</p>
+
+      <% if current_user %>
+        <%= link_to "Logged in as #{current_user.first_name}", destroy_user_session_path, class: 'text-sm font-light hover:underline' %>
+      <% else %>
+        <%= link_to 'Sign in', new_user_session_url %>
+      <% end %>
+    </div>
+
+    <%# User profile page %>
+    <div class="border text-right">
+      <p class="inline-block rounded-full border border-black p-2"><%= initials(current_user) %></p>
+    </div>
+  </div>
+
+  <div class="py-5">
+    <p>Transactions from [month picker]</p>
+  </div>
+
+  <div class="sticky pb-2 font-light text-xs text-gray-400">[8/30/22]</div>
+
+  <div class="grid grid-cols-5">
+    <div class="col-span-4">
+      <p class="text-xl">[Emma] [paid/owes] [Corey] for [Amazon Fresh]</p>
+    </div>
+    <div class="shrink-0 text-right">
+      <p class="text-xl font-semibold text-green-600">$42.19</p>
+    </div>
+  </div>
+  <div class="border-b border-gray-400 py-2">
+    <p>Paid via [Zelle] on [8/31/22] (if paid)</p>
+  </div>
+  <div class="mt-2">
+    <p>Broccoli $5.00</p>
+    <p>Asparagus $4.39</p>
+  </div>
+
 
   <p><%= link_to 'go to bills', bills_path %></p>
+
 </div>
