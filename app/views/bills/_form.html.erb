@@ -1,15 +1,27 @@
 <%= form_with model: bill do |form| %>
-  <% attributes = %i[title description amount paid paid_on paid_via transaction_date user_id person2_id] %>
+  <% attributes = %i[title description amount paid paid_on paid_via transaction_date] %>
   <% attributes.each do |attribute| %>
     <div class="pb-5">
-      <%= form.label attribute %>
-      <%= form.text_field(attribute) %>
+      <%= form.label "#{attribute}: " %>
+      <%= (attribute == :paid) ? form.check_box(attribute) : form.text_field(attribute) %>
 
       <% bill.errors.full_messages_for(attribute).each do |message| %>
         <div><%= message %></div>
       <% end %>
     </div>
   <% end %>
+
+  <div class="pb-5">
+    <%= form.text_field(:user_id) %>
+    <% bill.errors.full_messages_for(:user_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+    <span>paid/owes</span>
+    <%= form.text_field(:person2_id) %>
+    <% bill.errors.full_messages_for(:person2_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 
   <div>
     <%= form.submit %><br>
