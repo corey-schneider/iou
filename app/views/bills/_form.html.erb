@@ -1,0 +1,18 @@
+<%= form_with model: bill do |form| %>
+  <% attributes = %i[title description amount paid paid_on] %>
+  <% attributes.each do |attribute| %>
+    <div class="pb-5">
+      <%= form.label attribute %>
+      <%= form.text_field(attribute) %>
+
+      <% bill.errors.full_messages_for(attribute).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %><br>
+    <%= link_to 'Back', bills_path %>
+  </div>
+<% end %>
