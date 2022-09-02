@@ -17,7 +17,9 @@
 
     <%# User profile page %>
     <div class="border text-right">
-      <p class="inline-block rounded-full border border-black p-2"><%= initials(current_user) %></p>
+      <%= link_to user_path(current_user) do %>
+        <p class="inline-block rounded-full border border-black p-2"><%= initials(current_user) %></p>
+      <% end %>
     </div>
   </div>
 
