@@ -1,13 +1,21 @@
-<p>id = <%= @bill.id %> </p>
-<p>title = <%= @bill.title %></p>
-<p>amount = <%= @bill.amount %></p>
-<p>paid? = <%= @bill.paid %></p>
-<p>paid on = <%= @bill.paid_on %></p>
-<p>paid via = <%= @bill.paid_via %></p>
-<p>transaction date = <%= @bill.transaction_date %></p>
-<p>user id = <%= @bill.user_id %></p>
-<p>person2 id = <%= @bill.person2_id %></p>
+<div class="py-5">
+  <%= render 'layouts/bill_group', bill: @bill %>
 
-<%= link_to 'edit', edit_bill_path(@bill) %>
-<br>
-<%= link_to 'home', root_path %>
+  <div class="my-8"></div>
+
+  <%= link_to 'edit', edit_bill_path(@bill) %>
+  <br>
+  <%= link_to 'home', root_path %>
+
+  <div class="my-8"></div>
+
+  <p>id = <%= @bill.id %> </p>
+  <p>title = <%= @bill.title %></p>
+  <p>amount = <%= @bill.amount %></p>
+  <p>paid? = <%= @bill.paid %></p>
+  <p>paid on = <%= @bill.paid_on %></p>
+  <p>paid via = <%= @bill.paid_via %></p>
+  <p>transaction date = <%= @bill.transaction_date %></p>
+  <p>user id = <%= @bill.user_id %></p>
+  <p>person2 id = <%= @bill.person2_id %></p>
+</div>

@@ -1,0 +1,26 @@
+<div class="grid grid-cols-5">
+  <div class="col-span-4">
+    <p class="text-xl"><%= bill.user.first_name %> <%= paid_or_owes(bill) %> <%= User.find(bill.person2_id).first_name %> for <%= bill.title %></p>
+  </div>
+  <div class="shrink-0 text-right">
+    <% if bill.paid? %>
+      <p class="text-xl font-semibold text-green-700">
+    <% else %>
+      <p class="text-xl font-semibold text-red-700">
+    <% end %>
+      <%= number_to_currency(bill.amount) %>
+    </p>
+  </div>
+</div>
+
+<% if bill.paid? %>
+  <div class="pt-1">
+    <p class="font-light text-gray-600">Paid via <%= bill.paid_via %> on <%= bill.paid_on %> (if paid)</p>
+  </div>
+<% end %>
+
+<% if !bill.description.empty? %>
+  <div class="font-light text-gray-500 text-sm mt-2 pl-4">
+    <p><%= bill.description %></p>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
-<div class="px-5">
-  <div class="grid grid-cols-3 border-b border-slate-400 py-3">
+<div>
+  <div class="grid grid-cols-3 border-b border-slate-400 pb-3">
 
     <%# Navigation opener %>
     <div id="nav-opener" class="border">[ x ]</div>
@@ -27,36 +27,19 @@
     <p>Transactions from [month picker]</p>
   </div>
 
+  <div class="bottom flex justify-end h-20">
+    <%= link_to new_bill_path do %>
+      <div class="inline-block rounded-full border-[0.5px] border-black bg-green-300 px-2 text-3xl">
+        <p>+</p>
+      </div>
+    <% end %>
+  </div>
+
   <div class="sticky pb-2 font-light text-xs text-gray-400">[8/30/22]</div>
 
   <% @bills.each do |bill| %>
     <%= link_to bill do %>
-      <div class="grid grid-cols-5">
-        <div class="col-span-4">
-          <p class="text-xl"><%= bill.user.first_name %> <%= paid_or_owes(bill) %> <%= User.find(bill.person2_id).first_name %> for <%= bill.title %></p>
-        </div>
-        <div class="shrink-0 text-right">
-          <% if bill.paid? %>
-            <p class="text-xl font-semibold text-green-700">
-          <% else %>
-            <p class="text-xl font-semibold text-red-700">
-          <% end %>
-            <%= number_to_currency(bill.amount) %>
-          </p>
-        </div>
-      </div>
-
-      <% if bill.paid? %>
-        <div class="pt-1">
-          <p class="font-light text-gray-600">Paid via <%= bill.paid_via %> on <%= bill.paid_on %> (if paid)</p>
-        </div>
-      <% end %>
-
-      <% if !bill.description.empty? %>
-        <div class="font-light text-gray-500 text-sm mt-2 pl-4">
-          <p><%= bill.description %></p>
-        </div>
-      <% end %>
+      <%= render 'layouts/bill_group', bill: bill %>
     <% end %>
 
       <div class="my-5 border border-dashed border-black"></div>
