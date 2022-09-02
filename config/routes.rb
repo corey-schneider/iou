@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :bills
 
   devise_for :users
+
+  resources :users, only: [:show]
 end
