@@ -1,5 +1,9 @@
 <p>bill index</p>
-<%= link_to 'new bill', new_bill_path %>
+
+<%= turbo_frame_tag "new_bill", target: "_top" %>
+
+<%= link_to "New Bill", new_bill_path, data: { turbo_frame: "new_bill" } %>
+
 <br>
 <%= link_to 'home', root_path %>
 

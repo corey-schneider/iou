@@ -1,8 +1,10 @@
-<p>new bill</p>
-<% if current_user %>
-  <p>Logged in as <%= current_user.id %></p>
-  <%= link_to 'Sign out', destroy_user_session_path %>
-<% else %>
-  <%= link_to 'Sign in', new_user_session_url %>
+<%= turbo_frame_tag @bill do %>
+  <p>new bill</p>
+  <% if current_user %>
+    <p>Logged in as <%= current_user.id %></p>
+    <%= link_to 'Sign out', destroy_user_session_path %>
+  <% else %>
+    <%= link_to 'Sign in', new_user_session_url %>
+  <% end %>
+  <%= render "form", bill: @bill %>
 <% end %>
-<%= render "form", bill: @bill %>

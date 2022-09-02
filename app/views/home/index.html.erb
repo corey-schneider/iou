@@ -27,8 +27,10 @@
     <p>Transactions from [month picker]</p>
   </div>
 
-  <div class="bottom flex justify-end h-20">
-    <%= link_to new_bill_path do %>
+  <div class="flex justify-end">
+    <%= turbo_frame_tag "new_bill", target: "_top" %>
+
+    <%= link_to new_bill_path, data: { turbo_frame: "new_bill" } do %>
       <div class="inline-block rounded-full border-[0.5px] border-black bg-green-300 px-2 text-3xl">
         <p>+</p>
       </div>
