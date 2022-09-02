@@ -3,18 +3,18 @@
   <p>
     <%= form.select :user_id, User.all.collect {|p| [ p.first_name, p.id ] }, class: 'border rounded-lg' %>
     <% bill.errors.full_messages_for(:user_id).each do |message| %>
-      <div><%= message %></div>
+      <div class="error"><%= message %></div>
     <% end %>
     paid/owes
     
     <%= form.select :person2_id, User.all.collect {|p| [ p.first_name, p.id ] }, class: 'rounded-xl' %>
     <% bill.errors.full_messages_for(:person2_id).each do |message| %>
-      <div><%= message %></div>
+      <div class="error"><%= message %></div>
     <% end %>
     for
     <%= form.text_field :title, placeholder: 'Rent' %>
     <% bill.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
+      <div class="error"><%= message %></div>
     <% end %>
   </p>
 
@@ -40,7 +40,7 @@
   <p class="-mt-1"><span class="text-sm font-semibold text-gray-500">NOT paid date.</span> <span class="text-sm font-light text-gray-500">When was the item(s) purchased?</span></p>
   <%= form.text_field :transaction_date, placeholder: Date.today.strftime('%Y-%m-%d') %>
   <% bill.errors.full_messages_for(:transaction_date).each do |message| %>
-    <div><%= message %></div>
+    <div class="error"><%= message %></div>
   <% end %>
 
   <div>
