@@ -1,27 +1,47 @@
 <%= form_with model: bill do |form| %>
-  <% attributes = %i[title description amount paid paid_on paid_via transaction_date] %>
-  <% attributes.each do |attribute| %>
-    <div class="pb-5">
-      <%= form.label "#{attribute}: " %>
-      <%= (attribute == :paid) ? form.check_box(attribute) : form.text_field(attribute) %>
 
-      <% bill.errors.full_messages_for(attribute).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div class="pb-5">
-    <%= form.select :user_id, User.all.collect {|p| [ p.first_name, p.id ] } %>
+  <p>
+    <%= form.select :user_id, User.all.collect {|p| [ p.first_name, p.id ] }, class: 'border rounded-lg' %>
     <% bill.errors.full_messages_for(:user_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
-    <span>paid/owes</span>
-    <%= form.select :person2_id, User.all.collect {|p| [ p.first_name, p.id ] } %>
+    paid/owes
+    
+    <%= form.select :person2_id, User.all.collect {|p| [ p.first_name, p.id ] }, class: 'rounded-xl' %>
     <% bill.errors.full_messages_for(:person2_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
+    for
+    <%= form.text_field :title, placeholder: 'Rent' %>
+    <% bill.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </p>
+
+  <span>Amount paid/owed:</span>
+  <%= form.text_field :amount, placeholder: '12.34', class: 'border-b-2 border-x-0 border-t-0 max-w-[100px]' %>
+
+  <div class="border mt-3"></div>
+
+  <div class="mt-3">
+    <p>Paid? <%= form.check_box(:paid) %></p>
+    <p>Paid via <%= form.text_field :paid_via, placeholder: 'Zelle', class: 'w-24' %> on <%= form.text_field :paid_on, placeholder: Date.today.strftime('%Y-%m-%d') %></p>
   </div>
+
+  <div class="border mt-3"></div>
+
+  <p class="mt-3">Description</p>
+  <p class="text-sm font-light text-gray-500 -mt-1">Use this for itemized bills, like grocery orders</p>
+  <p><%= form.text_field :description, placeholder: 'add list here if applicable' %></p>
+
+  <div class="border mt-3"></div>
+
+  <p class="mt-3">Transaction date</p>
+  <p class="-mt-1"><span class="text-sm font-semibold text-gray-500">NOT paid date.</span> <span class="text-sm font-light text-gray-500">When was the item(s) purchased?</span></p>
+  <%= form.text_field :transaction_date, placeholder: Date.today.strftime('%Y-%m-%d') %>
+  <% bill.errors.full_messages_for(:transaction_date).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
 
   <div>
     <%= form.submit %><br>
