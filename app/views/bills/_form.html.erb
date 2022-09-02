@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="pb-5">
-    <%= form.text_field(:user_id) %>
+    <%= form.select :user_id, User.all.collect {|p| [ p.first_name, p.id ] } %>
     <% bill.errors.full_messages_for(:user_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
     <span>paid/owes</span>
-    <%= form.text_field(:person2_id) %>
+    <%= form.select :person2_id, User.all.collect {|p| [ p.first_name, p.id ] } %>
     <% bill.errors.full_messages_for(:person2_id).each do |message| %>
       <div><%= message %></div>
     <% end %>
