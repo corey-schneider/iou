@@ -11,7 +11,7 @@
 
   <p>id = <%= @bill.id %> </p>
   <p>title = <%= @bill.title %></p>
-  <p>amount = <%= @bill.amount %></p>
+  <p>amount = <%= number_to_currency @bill.amount %></p>
   <p>paid? = <%= @bill.paid %></p>
   <p>paid on = <%= @bill.paid_on %></p>
   <p>paid via = <%= @bill.paid_via %></p>
