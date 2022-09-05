@@ -1,6 +1,7 @@
-<p>hello from users show</p>
-<p>user: <%= @user.first_name %> <%= @user.last_name %>, id: <%= @user.id %></p>
-<p>Owned bills:</p>
-<% @user.bills.each do |bill| %>
-  <%= link_to bill.title, bill %>
-<% end %>
+<div>
+  <p>user: <%= @user.first_name %> <%= @user.last_name %>, id: <%= @user.id %></p>
+  <p>Owned bills:</p>
+  <% @user.bills.each do |bill| %>
+    <%= link_to bill.title, bill %>
+  <% end %>
+</div>
