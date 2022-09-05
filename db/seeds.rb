@@ -14,9 +14,9 @@ User.create([
     last_name: 'Schneider'
   },
   {
-    email: 'tester@test.com',
+    email: 'emma@test.com',
     password: 'thisIsAFakePassword1',
-    first_name: 'Tester',
-    last_name: 'Lastname'
+    first_name: 'Emma',
+    last_name: 'R'
   }
 ])
