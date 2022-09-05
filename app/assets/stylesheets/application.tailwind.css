@@ -6,4 +6,16 @@
   .error {
     @apply text-red-700 font-bold
   }
+
+  button,
+  .input,
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    @apply bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded hover:cursor-grab
+  }
+
+  a {
+    @apply underline
+  }
 }
