@@ -8,6 +8,6 @@ class Bill < ApplicationRecord
   protected
 
   def check_users
-    errors.add(:user_id, 'This user cannot owe/pay themselves') unless user_id != person2_id
+    errors.add(:user_id, 'This user cannot owe/pay themselves') if user_id == person2_id
   end
 end
