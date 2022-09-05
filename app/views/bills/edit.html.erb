@@ -1,3 +1,6 @@
 <h1>Edit Bill</h1>
 
-<%= render "form", bill: @bill %>
+<%= turbo_frame_tag @bill do %>
+  <%= render "form", bill: @bill %>
+  <%= link_to 'Cancel', root_path %>
+<% end %>

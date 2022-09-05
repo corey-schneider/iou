@@ -39,12 +39,14 @@
 
   <div class="sticky pb-2 font-light text-xs text-gray-400">[8/30/22]</div>
 
-  <% @bills.each do |bill| %>
-    <%= link_to bill do %>
-      <%= render 'layouts/bill_group', bill: bill %>
+  <% @sorted_bills.each do |bill| %>
+    <%= turbo_frame_tag bill, target: "_top" do %>
+      <%= link_to edit_bill_path(bill), data: { turbo_frame: bill } do %>
+        <%= render 'layouts/bill_group', bill: bill %>
+      <% end %>
     <% end %>
 
-      <div class="my-5 border border-dashed border-black"></div>
+    <div class="my-5 border border-dashed border-black"></div>
   <% end %>
 
   <p><%= link_to 'go to bills', bills_path %></p>
