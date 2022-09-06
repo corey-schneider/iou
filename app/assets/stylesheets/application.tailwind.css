@@ -3,16 +3,27 @@
 @tailwind utilities;
 
 @layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+
   .error {
     @apply text-red-700 font-bold
   }
 
   button,
+  .button,
   .input,
   [type='button'],
   [type='reset'],
   [type='submit'] {
-    @apply bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded hover:cursor-grab
+    @apply bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded hover:cursor-pointer
   }
 
   a {
