@@ -30,6 +30,7 @@
 
   <div class="py-5">
     <p>Transactions from [month picker]</p>
+    <%= Bill.from_month(Date.today) %>
   </div>
 
   <div class="flex justify-end">
@@ -42,7 +43,7 @@
     <% end %>
   </div>
 
-  <% @grouped_bills.each do |bill_group| %>
+  <% Bill.from_month_grouped(Date.today).each do |bill_group| %>
     <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
     <% bill_group[1].each_with_index do |bill, index| %>
     <% bill = Bill.find(bill) %>
