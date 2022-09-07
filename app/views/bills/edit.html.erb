@@ -1,4 +1,4 @@
-<h1>Edit Bill</h1>
+<h1 class="mb-5">Edit Bill #<%= @bill.id %></h1>
 
 <%= turbo_frame_tag @bill do %>
   <%= render "form", bill: @bill %>
