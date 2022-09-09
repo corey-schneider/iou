@@ -1,7 +1,21 @@
 <div>
-  <p>user: <%= @user.first_name %> <%= @user.last_name %>, id: <%= @user.id %></p>
-  <p>Owned bills:</p>
-  <% @user.bills.each do |bill| %>
-    <%= link_to bill.title, bill, class: 'no-underline' %>
-  <% end %>
+  <p class="mb-5">user: <%= @user.first_name %> <%= @user.last_name %>, id: <%= @user.id %></p>
+
+  <div class="mb-5">
+    <h3><%= @user.first_name %> owes money on the following bills:</h3>
+    <ul>
+      <% @user.bills.owed.each do |bill| %>
+        <li><%= link_to bill.title, bill, class: 'no-underline hover:font-semibold' %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="mb-5">
+  <h3><%= @user.first_name %> has paid back:</h3>
+    <ul>
+      <% @user.bills.paid.each do |bill| %>
+        <li><%= link_to bill.title, bill, class: 'no-underline hover:font-semibold' %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
