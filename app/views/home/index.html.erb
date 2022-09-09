@@ -1,33 +1,4 @@
 <div>
-  <div class="grid grid-cols-3 border-b border-slate-400 pb-3">
-
-    <%# Navigation opener %>
-    <div id="nav-opener">
-      <%# TODO maybe remove this %>
-    </div>
-
-    <%# Center of page %>
-    <div class="text-center">
-      <p class="text-xl">IOU</p>
-
-      <% if current_user %>
-        <%= link_to "Logged in as #{current_user.first_name}", destroy_user_session_path, class: 'text-sm font-light hover:underline' %>
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_url %>
-      <% end %>
-    </div>
-
-    <%# User profile page %>
-    <div class="text-right">
-      <% if current_user %>
-        <%= link_to user_path(current_user), class: 'no-underline' do %>
-          <% color = %>
-          <p class="inline-block rounded-full border border-black p-2"><%= initials(current_user) %></p>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
   <% date = params.has_key?(:search) ? Date.parse("#{params[:search][:month]}-1") : Date.today %>
   <div class="py-5">
     <%= form_for(:search, url: root_path, method: :get) do |form| %>
