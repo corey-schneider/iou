@@ -18,7 +18,7 @@ class BillsController < ApplicationController
     @bill.user = current_user
 
     if @bill.save
-      redirect_to @bill
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class BillsController < ApplicationController
 
   def update
     if @bill.update(bill_params)
-      redirect_to @bill
+      redirect_to root_path
     else
       render :edit, status: :unprocessable_entity
     end
