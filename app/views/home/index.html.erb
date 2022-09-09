@@ -18,6 +18,10 @@
     <% end %>
   </div>
 
+  <% if Bill.from_month_grouped(date).empty? %>
+    <h3 class="text-center font-semibold my-5">No bills found for <%= date.strftime('%B %Y') %></h3>
+  <% end %>
+
   <% Bill.from_month_grouped(date).each do |bill_group| %>
     <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
     <% bill_group[1].each_with_index do |bill, index| %>
