@@ -15,6 +15,12 @@ class Bill < ApplicationRecord
       .order(transaction_date: :desc)
       .pluck(:transaction_date, 'array_agg(id)')
   }
+  scope :all_grouped, lambda {
+    select(:transaction_date, 'array_agg(id)')
+      .group(:transaction_date)
+      .order(transaction_date: :desc)
+      .pluck(:transaction_date, 'array_agg(id)')
+  }
   scope :owed, -> { where(paid: false) }
   scope :paid, -> { where(paid: true) }
 

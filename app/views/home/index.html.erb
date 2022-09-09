@@ -1,5 +1,4 @@
 <div>
-  <% date = params.has_key?(:search) ? Date.parse("#{params[:search][:month]}-1") : Date.today %>
   <div class="py-5">
     <%= form_for(:search, url: root_path, method: :get) do |form| %>
       <span>Transactions from: </span>
@@ -7,6 +6,7 @@
       <%= form.submit "Show", class: 'btn btn-success' %>
     <% end %>
   </div>
+  <%= link_to 'Show all bills', root_path(search: 'all'), method: :get %>
 
   <div class="flex justify-end">
     <%= turbo_frame_tag "new_bill", target: "_top" %>
@@ -18,11 +18,11 @@
     <% end %>
   </div>
 
-  <% if Bill.from_month_grouped(date).empty? %>
+  <% if bills.empty? %>
     <h3 class="text-center font-semibold my-5">No bills found for <%= date.strftime('%B %Y') %></h3>
   <% end %>
 
-  <% Bill.from_month_grouped(date).each do |bill_group| %>
+  <% bills.each do |bill_group| %>
     <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
     <% bill_group[1].each_with_index do |bill, index| %>
     <% bill = Bill.find(bill) %>
