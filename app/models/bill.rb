@@ -2,7 +2,7 @@ class Bill < ApplicationRecord
   belongs_to :user
 
   # Required params
-  validates_presence_of :title, :amount, :transaction_date
+  validates_presence_of :title, :amount, :transaction_date, :user_id, :person2_id
 
   validate :check_users
 
