@@ -26,8 +26,8 @@
     <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
     <% bill_group[1].each_with_index do |bill, index| %>
     <% bill = Bill.find(bill) %>
-      <%= turbo_frame_tag bill, target: "_top" do %>
-        <%= link_to edit_bill_path(bill), data: { turbo_frame: bill }, class: 'no-underline' do %>
+      <%= turbo_frame_tag "edit_#{bill.id}", target: "_top" do %>
+        <%= link_to edit_bill_path(bill), data: { turbo_frame: "edit_#{bill.id}" }, class: 'no-underline' do %>
           <%= render 'layouts/bill_group', bill: bill %>
         <% end %>
       <% end %>
