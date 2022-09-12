@@ -15,8 +15,6 @@ class BillsController < ApplicationController
   def create
     @bill = Bill.new(bill_params)
 
-    @bill.user = current_user
-
     if @bill.save
       redirect_to root_path
     else
