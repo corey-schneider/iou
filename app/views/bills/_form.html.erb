@@ -9,7 +9,7 @@
       <%= form.select :paid, [ ['paid', true], ['owes', false] ], data: { display_paid_target: "input" } %>
     </span>
 
-    <%= form.select :person2_id, User.all.collect {|user| [ user.first_name, user.id ] }, class: 'rounded-xl' %>
+    <%= form.select :person2_id, User.all.collect {|user| [ user.first_name, user.id ] }, selected: User.second.id, class: 'rounded-xl' %>
     <% bill.errors.full_messages_for(:user_id).each do |message| %>
       <div class="error"><%= message %></div>
     <% end %>
