@@ -6,15 +6,18 @@
       <%= form.submit "Show", class: 'btn btn-success' %>
     <% end %>
   </div>
+
   <%= link_to 'Show all bills', root_path(search: 'all'), method: :get %>
 
   <div class="flex justify-end">
     <%= turbo_frame_tag "new_bill", target: "_top" %>
 
-    <%= link_to new_bill_path, data: { turbo_frame: "new_bill" }, class: 'no-underline' do %>
-      <div class="inline-block rounded-full border-[0.5px] border-black bg-green-300 px-2 text-3xl">
-        <p>+</p>
-      </div>
+    <% if current_user %>
+      <%= link_to new_bill_path, data: { turbo_frame: "new_bill" }, class: 'no-underline' do %>
+        <div class="inline-block rounded-full border-[0.5px] border-black bg-green-300 px-2 text-3xl">
+          <p>+</p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
@@ -24,13 +27,16 @@
 
   <% bills.each do |bill_group| %>
     <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
+
     <% bill_group[1].each_with_index do |bill, index| %>
-    <% bill = Bill.find(bill) %>
+      <% bill = Bill.find(bill) %>
       <%= turbo_frame_tag "edit_#{bill.id}", target: "_top" do %>
         <%= link_to edit_bill_path(bill), data: { turbo_frame: "edit_#{bill.id}" }, class: 'no-underline' do %>
           <%= render 'layouts/bill_group', bill: bill %>
         <% end %>
       <% end %>
+
+      <%# Show this divider between bills from the same day %>
       <% unless bill_group[1].length == index + 1 %>
         <div class="border-[0.3px] border-gray-300 my-5"></div>
       <% end %>
@@ -38,7 +44,4 @@
 
     <div class="my-5 border border-dashed border-black"></div>
   <% end %>
-
-  <p><%= link_to 'go to bills', bills_path, class: 'button no-underline' %></p>
-
 </div>
