@@ -13,9 +13,9 @@
     <%= turbo_frame_tag "new_bill", target: "_top" %>
 
     <% if current_user %>
-      <%= link_to new_bill_path, data: { turbo_frame: "new_bill" }, class: 'no-underline' do %>
+      <%= link_to new_bill_path, data: { turbo_frame: "new_bill" }, class: 'no-underline hover:drop-shadow-lg hover:scale-105 transition duration-300' do %>
         <div class="inline-block rounded-full border-[0.5px] border-black bg-green-300 px-2 text-3xl">
-          <p>+</p>
+          <p class="-mt-1 -mx-[2px]">+</p>
         </div>
       <% end %>
     <% end %>

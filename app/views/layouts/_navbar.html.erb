@@ -6,7 +6,7 @@
 
   <%# Center of page %>
   <div class="text-center">
-    <p><%= link_to 'IOU', root_path, class: 'text-xl no-underline hover:font-semibold' %></p>
+    <h1><%= link_to 'IOU', root_path, class: 'text-3xl no-underline hover:font-semibold' %></h1>
 
     <% if current_user %>
       <%= link_to "Logged in as #{current_user.first_name}", destroy_user_session_path, class: 'text-sm font-light hover:underline' %>
