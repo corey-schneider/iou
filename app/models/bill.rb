@@ -23,6 +23,8 @@ class Bill < ApplicationRecord
   }
   scope :owed, -> { where(paid: false) }
   scope :paid, -> { where(paid: true) }
+  scope :amount_owed, -> { owed.sum('bills.amount') }
+  scope :amount_paid, -> { paid.sum('bills.amount') }
 
   protected
 
