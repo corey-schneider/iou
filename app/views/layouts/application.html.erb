@@ -14,6 +14,15 @@
   <body class="bg-slate-100">
     <main class="mx-auto px-10 py-5 max-w-xl border bg-white">
       <%= render 'layouts/navbar' %>
+      <% if notice %>
+        <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="notice">
+          <p><%= notice %></p>
+        </div>
+      <% elsif alert %>
+        <div class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3" role="alert">
+          <p><%= alert %></p>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
   </body>

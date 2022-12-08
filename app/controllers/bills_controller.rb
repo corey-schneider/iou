@@ -1,4 +1,5 @@
 class BillsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :find_current_bill, only: %i[show edit update destroy]
 
   def show
