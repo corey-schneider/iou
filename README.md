@@ -1,6 +1,8 @@
 # IOU App
 ### An expense tracking application built with Rails 7
 
+Demo available at http://iou-app.tk/
+
 <hr>
 
 #### Home page
