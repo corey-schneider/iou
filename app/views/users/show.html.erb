@@ -1,9 +1,11 @@
 <div>
-  <h2 class="mb-5">
+  <h2 class="pb-5">
     <%= @user.first_name %> <%= @user.last_name %>'s Profile
   </h2>
 
-  <div class="mb-5">
+  <%= link_to 'Friends list', user_friends_path(@user) %>
+
+  <div class="py-5">
     <h3>
       <%= @user.first_name %> owes <span class="font-bold text-red-600"><%= number_to_currency(@user.bills.owes_amount) %></span>:
     </h3>

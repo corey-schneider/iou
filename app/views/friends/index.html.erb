@@ -1,0 +1,24 @@
+<h1><%= @user.first_name %>'s Friends</h1>
+<%= link_to 'Back', user_path(@user) %>
+
+<div class="py-2">
+  <%= link_to 'Add friend', new_user_friend_path %>
+</div>
+<br><br><br>
+
+<% @user.friends.each do |friend| %>
+  <div>
+    <span>
+      <%= link_to User.find(friend.friend_id).first_name, User.find(friend.friend_id) %> -
+      <span class="text-sm">
+        <%=
+          link_to 'unfriend', user_friend_path(user_id: @user.id, id: friend.friend_id),
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure you wish to remove this friend?"
+          }
+        %>
+      </span>
+    </span>
+  </div>
+<% end %>

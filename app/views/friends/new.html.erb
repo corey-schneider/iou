@@ -1,0 +1,15 @@
+<h1>Add friend</h1>
+
+<%= form_with model: @friend, url: user_friends_path, data: { turbo: false } do |form| %>
+  <div>
+    <%= form.label :friend_id %><br>
+    <%= form.text_field :friend_id %>
+    <% @friend.errors.full_messages_for(:friend_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
