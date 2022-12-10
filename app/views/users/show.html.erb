@@ -1,21 +1,50 @@
 <div>
-  <h2 class="mb-5"><%= @user.first_name %> <%= @user.last_name %>'s Profile</h2>
+  <h2 class="mb-5">
+    <%= @user.first_name %> <%= @user.last_name %>'s Profile
+  </h2>
 
   <div class="mb-5">
-    <h3><%= @user.first_name %> owes <%= number_to_currency(@user.bills.amount_owed) %> on the following bills:</h3>
-    <ul>
-      <% @user.bills.owed.each do |bill| %>
-        <li><%= link_to "#{bill.title} - (#{number_to_currency(bill.amount)})", bill, class: 'no-underline hover:font-semibold' %></li>
-      <% end %>
-    </ul>
+    <h3>
+      <%= @user.first_name %> owes <span class="font-bold text-red-600"><%= number_to_currency(@user.bills.owes_amount) %></span>:
+    </h3>
+
+    <% @user.bills.owes.each do |bill| %>
+      <div class="even:bg-slate-100 py-2">
+        <%= number_to_currency(bill.amount) %> to
+        <%= link_to User.find(bill.person2_id).first_name, user_path(User.find(bill.person2_id)) %> for
+        <%= link_to bill.title, bill %> on
+        <%= bill.transaction_date.strftime("%b %e, %Y") %>
+      </div>
+    <% end %>
   </div>
 
   <div class="mb-5">
-  <h3><%= @user.first_name %> has paid <%= number_to_currency(@user.bills.amount_paid) %> back:</h3>
-    <ul>
-      <% @user.bills.paid.each do |bill| %>
-        <li><%= link_to "#{bill.title} - (#{number_to_currency(bill.amount)})", bill, class: 'no-underline hover:font-semibold' %></li>
-      <% end %>
-    </ul>
+    <h3>
+      <%= @user.first_name %> has paid <span class="font-bold text-green-600"><%= number_to_currency(@user.bills.paid_amount) %></span> back:
+    </h3>
+    
+    <% @user.bills.paid.each do |bill| %>
+      <div class="even:bg-slate-100 py-2">
+        <%= number_to_currency(bill.amount) %> to
+        <%= link_to User.find(bill.person2_id).first_name, user_path(User.find(bill.person2_id)) %> for
+        <%= link_to bill.title, bill %> on
+        <%= bill.paid_on.strftime("%b %e, %Y") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-5">
+    <h3>
+      <%= @user.first_name %> is owed <span class="font-bold text-red-600"><%= number_to_currency(Bill.owed_to(@user).sum(&:amount)) %></span>:
+    </h3>
+
+    <% Bill.owed_to(@user).order(transaction_date: :desc).each do |bill| %>
+      <div class="even:bg-slate-100 py-2">
+        <%= number_to_currency(bill.amount) %> by
+        <%= link_to bill.user.first_name, user_path(bill.user) %> for
+        <%= link_to bill.title, bill %> on
+        <%= bill.transaction_date.strftime("%b %e, %Y") %>
+      </div>
+    <% end %>
   </div>
 </div>
