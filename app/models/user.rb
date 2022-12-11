@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :bills
   has_many :friends
+
+  validates_presence_of :first_name, :last_name, :email, :password
 end

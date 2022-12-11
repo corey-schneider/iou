@@ -1,4 +1,25 @@
 <h1>Add friend</h1>
+<%= link_to 'Back', user_friends_path %>
+
+<br><br><br>
+
+<%= form_tag(new_user_friend_path, method: :get) do %>
+  <p>Search for friend</p>
+  <p class="text-sm">Note, you can search by first name, last name, or email address</p>
+  <%= text_field_tag :search_query, params[:search_query] %>
+  <%= submit_tag 'Search', class: 'btn btn-success', name: nil %>
+<% end %>
+
+<% if @results %>
+  <div class="py-8">
+    <p>Results:</p>
+    <% @results.each do |result| %>
+      <div>
+        <%= result.first_name %> <%= result.last_name %> - <%= add_or_remove_friend(@user, result) %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <%= form_with model: @friend, url: user_friends_path, data: { turbo: false } do |form| %>
   <div>

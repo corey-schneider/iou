@@ -11,13 +11,7 @@
     <span>
       <%= link_to User.find(friend.friend_id).first_name, User.find(friend.friend_id) %> -
       <span class="text-sm">
-        <%=
-          link_to 'unfriend', user_friend_path(user_id: @user.id, id: friend.friend_id),
-          data: {
-            turbo_method: :delete,
-            turbo_confirm: "Are you sure you wish to remove this friend?"
-          }
-        %>
+        <%= show_unfriend_link(@user.id, friend.friend_id) %>
       </span>
     </span>
   </div>

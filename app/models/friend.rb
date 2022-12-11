@@ -1,3 +1,5 @@
+
+# TODO maybe rename Friend to Contact
 class Friend < ApplicationRecord
   belongs_to :user
 
