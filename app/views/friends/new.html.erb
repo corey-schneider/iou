@@ -5,8 +5,8 @@
 
 <%= form_tag(new_user_friend_path, method: :get) do %>
   <p>Search for friend</p>
-  <p class="text-sm">Note, you can search by first name, last name, or email address</p>
-  <%= text_field_tag :search_query, params[:search_query] %>
+  <p class="text-xs italic pb-2">Note, you can search by first name, last name, or email address</p>
+  <%= text_field_tag :search_query, params[:search_query], minlength: 3 %>
   <%= submit_tag 'Search', class: 'btn btn-success', name: nil %>
 <% end %>
 
@@ -18,19 +18,7 @@
         <%= result.first_name %> <%= result.last_name %> - <%= add_or_remove_friend(@user, result) %>
       </div>
     <% end %>
-  </div>
-<% end %>
 
-<%= form_with model: @friend, url: user_friends_path, data: { turbo: false } do |form| %>
-  <div>
-    <%= form.label :friend_id %><br>
-    <%= form.text_field :friend_id %>
-    <% @friend.errors.full_messages_for(:friend_id).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= link_to 'Clear results', new_user_friend_path, class: 'block py-3 uppercase font-semibold text-sm text-gray-500' %>
   </div>
 <% end %>
