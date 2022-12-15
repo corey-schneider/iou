@@ -1,6 +1,7 @@
 class FriendsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create destroy]
   before_action :find_current_user
+  # load_and_authorize_resource
 
   def index; end
 
@@ -22,7 +23,8 @@ class FriendsController < ApplicationController
   end
 
   def destroy
-    @friend = Friend.find_by(user_id: params[:user_id], friend_id: params[:id])
+    # @friend = Friend.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
+    @friend = Friend.find(params[:id])
     @friend.destroy
 
     redirect_to user_friends_path, status: :see_other

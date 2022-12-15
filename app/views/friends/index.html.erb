@@ -4,15 +4,21 @@
 <div class="py-2">
   <%= link_to 'Add friend', new_user_friend_path %>
 </div>
+
 <br><br><br>
 
-<% @user.friends.each do |friend| %>
-  <div>
-    <span>
-      <%= link_to User.find(friend.friend_id).first_name, User.find(friend.friend_id) %> -
-      <span class="text-sm">
-        <%= show_unfriend_link(@user.id, friend.friend_id) %>
+<% if @user.friends.empty? %>
+  <p>No friends found. Add a new friend from the link above</p>
+<% else %>
+  <% @user.friends.each do |friend| %>
+    <% friend_user = User.find(friend.friend_id) %>
+    <div>
+      <span>
+        <%= link_to friend_user.first_name, friend_user %> -
+        <span class="text-sm">
+          <%= show_unfriend_link(@user.id, Friend.find(friend.id).id) %>
+        </span>
       </span>
-    </span>
-  </div>
+    </div>
+  <% end %>
 <% end %>
