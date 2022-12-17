@@ -44,7 +44,22 @@
       <div class="my-5 border border-dashed border-black"></div>
     <% end %>
   <% end %>
-  <div>
-    <%= link_to "Show bills from #{date.last_month.strftime('%B %Y')}", root_path(search: { month: date.last_month.strftime('%Y-%m') }), method: :get %>
+
+  <div class="flex justify-between pt-10 pb-5">
+    <%# Last month %>
+    <%= link_to root_path(search: { month: date.last_month.strftime('%Y-%m') }), method: :get, class: 'no-underline hover:underline' do %>
+      <p class="text-xs uppercase">
+        <i class="fas fa-angle-left"></i>
+        <%= date.last_month.strftime('%b %Y') %>
+      </p>
+    <% end %>
+
+    <%# Next month %>
+    <%= link_to root_path(search: { month: date.next_month.strftime('%Y-%m') }), method: :get, class: 'no-underline hover:underline' do %>
+      <p class="text-xs uppercase">
+        <%= date.next_month.strftime('%b %Y') %>
+        <i class="fas fa-angle-right"></i>
+      </p>
+    <% end %>
   </div>
 </div>
