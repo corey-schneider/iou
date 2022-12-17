@@ -23,25 +23,28 @@
 
   <% if bills.empty? %>
     <h3 class="text-center font-semibold my-5">No bills found for <%= date.strftime('%B %Y') %></h3>
-  <% end %>
+  <% else %>
+    <% bills.each do |bill_group| %>
+      <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
 
-  <% bills.each do |bill_group| %>
-    <div class="sticky pb-2 font-light text-xs text-gray-400"><%= bill_group[0] %></div>
+      <% bill_group[1].each_with_index do |bill, index| %>
+        <% bill = Bill.find(bill) %>
+        <%= turbo_frame_tag "edit_#{bill.id}", target: "_top" do %>
+          <%= link_to edit_bill_path(bill), data: { turbo_frame: "edit_#{bill.id}" }, class: 'no-underline' do %>
+            <%= render 'layouts/bill_group', bill: bill %>
+          <% end %>
+        <% end %>
 
-    <% bill_group[1].each_with_index do |bill, index| %>
-      <% bill = Bill.find(bill) %>
-      <%= turbo_frame_tag "edit_#{bill.id}", target: "_top" do %>
-        <%= link_to edit_bill_path(bill), data: { turbo_frame: "edit_#{bill.id}" }, class: 'no-underline' do %>
-          <%= render 'layouts/bill_group', bill: bill %>
+        <%# Show this divider between bills from the same day %>
+        <% unless bill_group[1].length == index + 1 %>
+          <div class="border-[0.3px] border-gray-300 my-5"></div>
         <% end %>
       <% end %>
 
-      <%# Show this divider between bills from the same day %>
-      <% unless bill_group[1].length == index + 1 %>
-        <div class="border-[0.3px] border-gray-300 my-5"></div>
-      <% end %>
+      <div class="my-5 border border-dashed border-black"></div>
     <% end %>
-
-    <div class="my-5 border border-dashed border-black"></div>
   <% end %>
+  <div>
+    <%= link_to "Show bills from #{date.last_month.strftime('%B %Y')}", root_path(search: { month: date.last_month.strftime('%Y-%m') }), method: :get %>
+  </div>
 </div>
