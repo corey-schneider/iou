@@ -2,14 +2,22 @@
 
   <div data-controller="display-paid" data-action="change->display-paid#toggle">
     <span class="pb-3">
-      <%= form.select :user_id, User.all.collect {|user| [ user.first_name, user.id ] }, class: 'border rounded-lg mb-3' %>
+      <%= form.select :user_id,
+        current_user.friends.collect { |friend| [ User.find(friend.friend_id).first_name, friend.friend_id ] }
+        .append([ current_user.first_name, current_user.id ]),
+        {}, { class: 'border rounded-lg mb-3' }
+      %>
     </span>
 
     <span data-display-paid-target="input" >
-      <%= form.select :paid, [ ['paid', true], ['owes', false] ], data: { display_paid_target: "input" } %>
+      <%= form.select :paid, [ ['paid', true], ['owes', false] ], {}, { class: 'border rounded-lg mb-3' } %>
     </span>
 
-    <%= form.select :person2_id, User.all.collect {|user| [ user.first_name, user.id ] }, class: 'rounded-xl' %>
+    <%= form.select :person2_id,
+      current_user.friends.collect { |friend| [ User.find(friend.friend_id).first_name, friend.friend_id ] }
+      .append([ current_user.first_name, current_user.id ]),
+      {}, { class: 'border rounded-lg mb-3' }
+    %>
     <% bill.errors.full_messages_for(:user_id).each do |message| %>
       <div class="error"><%= message %></div>
     <% end %>
