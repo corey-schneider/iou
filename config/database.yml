@@ -16,7 +16,7 @@ test:
 
 production:
   <<: *default
-  database: iou_production
+  # database: iou_production
   # password: <%= Rails.application.credentials.database[:password_prod] %>
   database: <%= ENV['PGDATABASE'] %>
   username: <%= ENV['PGUSER'] %>
