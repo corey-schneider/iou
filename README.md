@@ -17,5 +17,7 @@ Demo available at https://iou.up.railway.app
 <hr>
 
 ##### Running application
+- `npm i`
+- `npm run build`
 - `npm run watch`
 - `rails s`
