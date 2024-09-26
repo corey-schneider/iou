@@ -1,0 +1,20 @@
+{
+  "name": "iou",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "esbuild": "^0.18.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "build": "esbuild --bundle app/javascript/application.js --outfile=app/assets/javascripts/application.js",
+    "watch": "esbuild --watch --bundle app/javascript/application.js --outfile=app/assets/javascripts/application.js"
+  }
+}
